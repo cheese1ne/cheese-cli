@@ -4,7 +4,6 @@ package com.cheese.boot.core.secure;
 import com.cheese.boot.core.secure.filter.JWTAuthenticationTokenFilter;
 import com.cheese.boot.core.secure.props.CheeseSecureProperties;
 import com.cheese.boot.core.secure.props.CheeseUserDetailsProperties;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,7 +38,6 @@ import java.util.List;
  *
  * @author xuling
  */
-@Data
 @Slf4j
 @Configuration
 @EnableWebSecurity
