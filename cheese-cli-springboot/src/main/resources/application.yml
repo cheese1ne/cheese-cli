@@ -1,0 +1,42 @@
+server:
+  port: 8888
+
+#自定义的安全配置，skipUrl为不需要拦截的url
+cheese:
+  secure:
+    skipUrl:
+      - /notify/**
+      - /client-dispatch/**
+      - /cheese/car/check
+      - /api/login
+      - /api/verifyCode
+    skipOther:
+      - /css/**
+      - /js/**
+      - /index.html
+      - /img/**
+      - /fonts/**
+      - /favicon.ico
+  user:
+    userDetails:
+      - kitty,$2a$10$35j6YJot7sJABEXEdNsCQeu8aO5uXCEiSoGl0t9nE9xxXouteeXhW
+      - lily,lily
+      - lomz,lomz
+      - admin,admin
+      - test,test
+      - wyadmin,admin
+#  async:
+#    corePoolSize: 2
+#    maxPoolSize: 50
+#    queueCapacity: 10000
+#    keepAliveSeconds: 300
+spring:
+  main:
+    allow-bean-definition-overriding: false
+  profiles:
+    active: dev
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/pmsone_cjwy?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
+#    username: root
+#    password: root

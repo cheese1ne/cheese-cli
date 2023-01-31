@@ -1,0 +1,7 @@
+#线程池核心参数的配置文件
+cheese:
+  async:
+    corePoolSize: 2
+    maxPoolSize: 50
+    queueCapacity: 10000
+    keepAliveSeconds: 300
