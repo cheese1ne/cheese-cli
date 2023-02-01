@@ -16,7 +16,7 @@ import java.util.List;
  * @author sobann
  */
 @RestController
-public class UserController {
+public class SecureCheckEndPoint {
 
     @RequestMapping("/")
     public String showHome() {

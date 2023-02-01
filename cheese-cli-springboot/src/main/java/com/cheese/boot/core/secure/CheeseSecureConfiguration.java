@@ -43,7 +43,7 @@ import java.util.List;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ConditionalOnProperty(value = "secure.enabled", matchIfMissing = true)
-@PropertySource(value = {"classpath:application.yml", "classpath:cheese-user.yml"})
+@PropertySource(value = {"classpath:application.yml"})
 @EnableConfigurationProperties({CheeseSecureProperties.class, CheeseUserDetailsProperties.class})
 public class CheeseSecureConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
