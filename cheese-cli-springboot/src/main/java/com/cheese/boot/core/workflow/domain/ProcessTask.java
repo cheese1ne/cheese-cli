@@ -21,6 +21,9 @@ import java.util.Date;
  */
 @Data
 public class ProcessTask implements Serializable {
+    private String id;
+    private String key;
+    private String processId;
     private String assignee;
     private String owner;
     private String name;
@@ -48,9 +51,12 @@ public class ProcessTask implements Serializable {
         ProcessTask processTask = new ProcessTask();
         if (Func.isNotEmpty(task) && task instanceof TaskEntityImpl) {
             TaskEntityImpl entity = (TaskEntityImpl) task;
+            processTask.setId(entity.getId());
+            processTask.setKey(entity.getTaskDefinitionKey());
+            processTask.setName(entity.getName());
+            processTask.setProcessId(entity.getProcessInstanceId());
             processTask.setAssignee(entity.getAssignee());
             processTask.setOwner(entity.getOwner());
-            processTask.setName(entity.getName());
             processTask.setPriority(entity.getPriority());
             processTask.setExecutionId(entity.getExecutionId());
             processTask.setProcessDefinitionId(entity.getProcessDefinitionId());
