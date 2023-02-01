@@ -7,6 +7,7 @@ package com.cheese.boot.common.constant;
  */
 public interface NumberConstant {
     int ZERO = 0;
+    int ONE = 1;
     int SIX = 6;
     int SEVEN = 7;
     int SIXTY = 60;

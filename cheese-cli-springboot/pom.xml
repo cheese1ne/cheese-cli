@@ -14,6 +14,13 @@
         <version>2.1.4.RELEASE</version>
     </parent>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <activiti-dependencies.version>7.1.0.M3.1</activiti-dependencies.version>
+    </properties>
+
     <dependencies>
         <!--web起步依赖-->
         <dependency>
@@ -63,11 +70,25 @@
             <artifactId>druid</artifactId>
             <version>1.1.10</version>
         </dependency>
+        <!--工作流-->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-image-generator</artifactId>
+        </dependency>
+        <!--jersey-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
 
         <!--cheese工具类-->
         <dependency>
             <groupId>com.cheese.core</groupId>
-            <artifactId>cheese-core-tool</artifactId>
+            <artifactId>cheese-core-common</artifactId>
             <version>1.0.0</version>
         </dependency>
 
@@ -78,6 +99,17 @@
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.activiti.dependencies</groupId>
+                <artifactId>activiti-dependencies</artifactId>
+                <version>${activiti-dependencies.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

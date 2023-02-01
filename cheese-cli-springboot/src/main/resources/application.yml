@@ -10,6 +10,8 @@ cheese:
       - /cheese/car/check
       - /api/login
       - /api/verifyCode
+      # 临时放开流程模块暴露的接口
+      - /api/workflow/**
     skipOther:
       - /css/**
       - /js/**
@@ -31,12 +33,19 @@ cheese:
 #    queueCapacity: 10000
 #    keepAliveSeconds: 300
 spring:
+  application:
+    name: cheese-cli
   main:
-    allow-bean-definition-overriding: false
+    allow-bean-definition-overriding: true
   profiles:
     active: dev
-#  datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/pmsone_cjwy?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true&allowMultiQueries=true
-#    username: root
-#    password: root
+  activiti:
+    database-schema-update: true
+    history-level: full
+    db-history-used: true
+    serialize-p-o-j-os-in-variables-to-json: false
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tms1cd_design?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: root
