@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 网关日志默认输出方式：通过Spring自带的日志记录方式进行输出
+ * 日志默认输出方式：通过Spring自带的日志记录方式进行输出
  *
  * @author sobann
  */
