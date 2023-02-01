@@ -179,6 +179,7 @@ public class CheeseSecureConfiguration extends WebSecurityConfigurerAdapter impl
      */
     @Bean("bCryptPasswordEncoder")
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        log.info("prepare to initialize BCryptPasswordEncoder");
         return new BCryptPasswordEncoder();
     }
 
