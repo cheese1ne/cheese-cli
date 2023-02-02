@@ -4,13 +4,17 @@ import com.cheese.boot.core.workflow.common.constant.WorkflowUriConstant;
 import com.cheese.boot.core.workflow.domain.ProcessTask;
 import com.cheese.boot.core.workflow.service.IActivitiService;
 import com.cheese.core.base.domain.R;
+import com.cheese.core.tool.util.Func;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 提供 http 服务 用于暴露流程相关接口
@@ -40,6 +44,7 @@ public class WorkflowEndpointResource {
         return R.ok(processExecution);
     }
 
+
     /**
      * 获取流程活动任务
      *
@@ -49,9 +54,10 @@ public class WorkflowEndpointResource {
     @GET
     @Path(WorkflowUriConstant.GET_ACTIVE_TASK)
     @Produces(MediaType.APPLICATION_JSON)
-    public R<ProcessTask> getProcessActiveTask(@QueryParam("processId") String processId) {
-        Task activeTask = activitiService.getActiveTask(processId);
-        return R.ok(ProcessTask.assemble(activeTask));
+    public R<List<ProcessTask>> getProcessActiveTask(@QueryParam("processId") String processId) {
+        List<Task> activeTasks = activitiService.getActiveTasks(processId);
+        if (Func.isEmpty(activeTasks)) return R.ok(Collections.emptyList());
+        return R.ok(activeTasks.stream().map(ProcessTask::assemble).collect(Collectors.toList()));
     }
 
     /**
