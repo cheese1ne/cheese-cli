@@ -3,6 +3,7 @@ package com.cheese.boot.core.secure.handler;
 import com.cheese.boot.common.constant.NormalCharConstant;
 import com.cheese.boot.core.secure.props.CheeseUserDetailsProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.util.Assert;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 用户认证的具体实现需要手动定义
@@ -27,8 +29,8 @@ public class UserDetailsServiceHandler implements UserDetailsService {
 
     private final CheeseUserDetailsProperties cheeseUserDetailsProperties;
 
-    public UserDetailsServiceHandler(CheeseUserDetailsProperties cheeseUserDetailsProperties) {
-        this.cheeseUserDetailsProperties = cheeseUserDetailsProperties;
+    public UserDetailsServiceHandler(ObjectProvider<CheeseUserDetailsProperties> cheeseUserDetailsPropertiesProvider) {
+        this.cheeseUserDetailsProperties = Optional.ofNullable(cheeseUserDetailsPropertiesProvider.getIfAvailable()).orElse(new CheeseUserDetailsProperties());
     }
 
     @Override

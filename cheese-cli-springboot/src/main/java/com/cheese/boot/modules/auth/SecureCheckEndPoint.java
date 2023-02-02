@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 public class SecureCheckEndPoint {
 
-    @RequestMapping("/")
+    @RequestMapping("/show")
     public String showHome() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         return name;

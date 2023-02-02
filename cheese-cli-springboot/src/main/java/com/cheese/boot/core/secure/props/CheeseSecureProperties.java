@@ -15,6 +15,8 @@ import java.util.List;
 @ConfigurationProperties(prefix = "cheese.secure")
 public class CheeseSecureProperties {
 
+    private boolean enabled = true;
+
     private final List<String> skipUrl = new ArrayList();
 
     private final List<String> skipOther = new ArrayList<>();
