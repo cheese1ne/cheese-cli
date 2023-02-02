@@ -13,13 +13,13 @@ import org.activiti.engine.delegate.JavaDelegate;
  *
  * @author sobann
  */
-public abstract class BaseWorkFlowDelegate implements JavaDelegate {
+public abstract class BaseServiceTaskDelegate implements JavaDelegate {
 
     private final IProcessConfigService processConfigService;
     private final ITaskConfigService taskConfigService;
 
-    public BaseWorkFlowDelegate(IProcessConfigService processConfigService,
-                                ITaskConfigService taskConfigService) {
+    public BaseServiceTaskDelegate(IProcessConfigService processConfigService,
+                                   ITaskConfigService taskConfigService) {
         this.processConfigService = processConfigService;
         this.taskConfigService = taskConfigService;
     }

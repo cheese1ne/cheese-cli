@@ -1,6 +1,6 @@
-package com.cheese.boot.modules.borrow.delegate;
+package com.cheese.boot.modules.workflow.delegate;
 
-import com.cheese.boot.core.workflow.delegate.BaseWorkFlowDelegate;
+import com.cheese.boot.core.workflow.delegate.BaseServiceTaskDelegate;
 import com.cheese.boot.core.workflow.service.IProcessConfigService;
 import com.cheese.boot.core.workflow.service.ITaskConfigService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service("borrowFailService")
-public class BorrowFailService extends BaseWorkFlowDelegate {
+public class BorrowFailService extends BaseServiceTaskDelegate {
 
     public BorrowFailService(ObjectProvider<IProcessConfigService> processConfigServiceProvider,
                              ObjectProvider<ITaskConfigService> taskConfigServiceProvider) {
