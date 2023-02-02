@@ -12,7 +12,7 @@ cheese:
       - /api/workflow/**
       # \u653E\u5F00admin\u76D1\u63A7\u7AEF\u70B9 \u5355\u4F53\u73AF\u5883 server\u548Cclient\u5728\u540C\u4E00\u4E2A\u5E94\u7528\u5185
       - /actuator/**
-      - /admin/instances
+      - /admin/**
     skipOther:
       - /css/**
       - /js/**
