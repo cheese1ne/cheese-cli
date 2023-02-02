@@ -1,58 +1,23 @@
 server:
   port: 8888
-
-#自定义的安全配置，skipUrl为不需要拦截的url
-cheese:
-  secure:
-    skipUrl:
-      - /notify/**
-      - /client-dispatch/**
-      - /cheese/car/check
-      - /api/login
-      - /api/verifyCode
-      # 临时放开流程模块暴露的接口
-      - /api/workflow/**
-    skipOther:
-      - /css/**
-      - /js/**
-      - /index.html
-      - /img/**
-      - /fonts/**
-      - /favicon.ico
-  user:
-    userDetails:
-      - kitty,$2a$10$35j6YJot7sJABEXEdNsCQeu8aO5uXCEiSoGl0t9nE9xxXouteeXhW
-      - lily,lily
-      - lomz,lomz
-      - admin,admin
-      - test,test
-      - wyadmin,admin
-#  async:
-#    corePoolSize: 2
-#    maxPoolSize: 50
-#    queueCapacity: 10000
-#    keepAliveSeconds: 300
 spring:
   application:
-    name: cheese-cli
-  main:
-    allow-bean-definition-overriding: true
+    name: cheese-cli-boot
   profiles:
     active: dev
-  activiti:
-    database-schema-update: true
-    history-level: full
-    db-history-used: true
-    serialize-p-o-j-os-in-variables-to-json: false
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/tms1cd_design?characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-    username: root
-    password: root
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initial-size: 10
-      min-idle: 10
-      max-active: 30
-      max-wait: 60000
+# log
+logging:
+  file: log/${spring.application.name}/${spring.application.name}.info.log
+  level:
+    com:
+      favorites: DEBUG
+      # 业务模块 DEBUG或者ERROR
+      cheese:
+        boot:
+          modules: DEBUG
+    org:
+      springframework:
+        web: DEBUG
+
+
 
