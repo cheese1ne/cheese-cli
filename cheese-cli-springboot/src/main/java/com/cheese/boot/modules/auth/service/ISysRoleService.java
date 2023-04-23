@@ -9,5 +9,11 @@ import com.cheese.boot.core.secure.domain.ISysRole;
  */
 public interface ISysRoleService {
 
+    /**
+     * 根据角色名获取系统角色
+     *
+     * @param name
+     * @return
+     */
     ISysRole selectByName(String name);
 }

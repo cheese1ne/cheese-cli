@@ -21,6 +21,7 @@ public interface IObjectMetaService {
     /**
      * 查询具体业务类型的流程业务元数据
      *
+     * @param objectType 业务类型
      * @return
      */
     List<IObjectMeta> getObjectMetas(String objectType);

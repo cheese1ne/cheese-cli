@@ -16,6 +16,7 @@ public interface ILogWriter {
      * 写日志
      *
      * @param logContent
+     * @throws Exception
      */
     void write(ILogContent logContent) throws Exception;
 }

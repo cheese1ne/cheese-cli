@@ -9,5 +9,10 @@ import org.activiti.engine.delegate.event.ActivitiEvent;
  */
 public interface IProcessTaskEventHandlerManager {
 
+    /**
+     * 事件处理
+     *
+     * @param event 流程活动事件
+     */
     void eventHandler(ActivitiEvent event);
 }

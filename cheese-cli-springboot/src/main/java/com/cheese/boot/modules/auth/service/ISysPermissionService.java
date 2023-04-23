@@ -11,5 +11,11 @@ import java.util.List;
  */
 public interface ISysPermissionService {
 
+    /**
+     * 根据角色id获取系统权限
+     *
+     * @param roleId
+     * @return
+     */
     List<ISysPermission> listByRoleId(Long roleId);
 }

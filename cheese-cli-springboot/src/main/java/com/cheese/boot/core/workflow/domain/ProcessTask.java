@@ -21,6 +21,8 @@ import java.util.Date;
  */
 @Data
 public class ProcessTask implements Serializable {
+    private static final long serialVersionUID = 6776419940342489400L;
+
     private String id;
     private String key;
     private String processId;

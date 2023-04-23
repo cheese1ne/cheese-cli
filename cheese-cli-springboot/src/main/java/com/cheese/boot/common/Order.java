@@ -9,5 +9,10 @@ package com.cheese.boot.common;
 @FunctionalInterface
 public interface Order {
 
+    /**
+     * 顺序
+     *
+     * @return 顺序号
+     */
     int order();
 }

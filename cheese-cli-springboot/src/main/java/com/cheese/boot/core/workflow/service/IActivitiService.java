@@ -17,6 +17,7 @@ public interface IActivitiService {
      *
      * @param process
      * @param param
+     * @return 流程实例id
      **/
     String createProcessExecution(String process, Map<String, Object> param);
 
@@ -32,7 +33,8 @@ public interface IActivitiService {
      * 获取流程下待执行任务
      * tip：此方法返回的是懒加载的对象
      *
-     * @param processId
+     * @param processId 流程id
+     * @return 活跃任务列表
      **/
     List<Task> getActiveTasks(String processId);
 
@@ -41,14 +43,15 @@ public interface IActivitiService {
      * tip：此方法返回的是懒加载的对象
      *
      * @param processId
+     * @return 流程活跃任务
      **/
     Task getActiveTask(String processId);
 
     /**
      * 跳转到目标任务
      *
-     * @param taskId
-     * @param targetTask
+     * @param taskId 任务id
+     * @param targetTask 目标任务标识
      **/
     void jump(String taskId, String targetTask);
 
