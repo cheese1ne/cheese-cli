@@ -3,9 +3,10 @@ package com.cheese.boot.core.workflow.domain;
 import com.cheese.core.tool.util.Func;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.activiti.engine.impl.persistence.entity.HistoricTaskInstanceEntityImpl;
 import org.activiti.engine.impl.persistence.entity.TaskEntityImpl;
 import org.activiti.engine.task.DelegationState;
-import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskInfo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -49,7 +50,7 @@ public class ProcessTask implements Serializable {
      * @param task
      * @return
      */
-    public static ProcessTask assemble(Task task) {
+    public static ProcessTask assemble(TaskInfo task) {
         ProcessTask processTask = new ProcessTask();
         if (Func.isNotEmpty(task) && task instanceof TaskEntityImpl) {
             TaskEntityImpl entity = (TaskEntityImpl) task;
@@ -68,6 +69,23 @@ public class ProcessTask implements Serializable {
             processTask.setParentTaskId(entity.getParentTaskId());
             processTask.setDelegationState(entity.getDelegationState());
             processTask.setSuspensionState(entity.getSuspensionState());
+            processTask.setClaimTime(entity.getClaimTime());
+        }
+        if (Func.isNotEmpty(task) && task instanceof HistoricTaskInstanceEntityImpl) {
+            HistoricTaskInstanceEntityImpl entity = (HistoricTaskInstanceEntityImpl) task;
+            processTask.setId(entity.getId());
+            processTask.setKey(entity.getTaskDefinitionKey());
+            processTask.setName(entity.getName());
+            processTask.setProcessId(entity.getProcessInstanceId());
+            processTask.setAssignee(entity.getAssignee());
+            processTask.setOwner(entity.getOwner());
+            processTask.setPriority(entity.getPriority());
+            processTask.setExecutionId(entity.getExecutionId());
+            processTask.setProcessDefinitionId(entity.getProcessDefinitionId());
+            processTask.setCreateTime(entity.getCreateTime());
+            processTask.setDescription(entity.getDescription());
+            processTask.setDueDate(entity.getDueDate());
+            processTask.setParentTaskId(entity.getParentTaskId());
             processTask.setClaimTime(entity.getClaimTime());
         }
         return processTask;

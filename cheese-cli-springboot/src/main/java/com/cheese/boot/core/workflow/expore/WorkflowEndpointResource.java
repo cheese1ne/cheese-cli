@@ -5,6 +5,7 @@ import com.cheese.boot.core.workflow.domain.ProcessTask;
 import com.cheese.boot.core.workflow.service.IActivitiService;
 import com.cheese.core.base.domain.R;
 import com.cheese.core.tool.util.Func;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,7 +28,6 @@ public class WorkflowEndpointResource {
 
     @Autowired
     private IActivitiService activitiService;
-
 
     /**
      * 创建流程实例
@@ -52,12 +52,27 @@ public class WorkflowEndpointResource {
      * @return 流程任务
      */
     @GET
-    @Path(WorkflowUriConstant.GET_ACTIVE_TASK)
+    @Path(WorkflowUriConstant.ACTIVE_TASK)
     @Produces(MediaType.APPLICATION_JSON)
     public R<List<ProcessTask>> getProcessActiveTask(@QueryParam("processId") String processId) {
         List<Task> activeTasks = activitiService.getActiveTasks(processId);
         if (Func.isEmpty(activeTasks)) return R.ok(Collections.emptyList());
         return R.ok(activeTasks.stream().map(ProcessTask::assemble).collect(Collectors.toList()));
+    }
+
+    /**
+     * 获取流程历史任务
+     *
+     * @param processId 流程实例id
+     * @return 流程任务
+     */
+    @GET
+    @Path(WorkflowUriConstant.HIS_TASK)
+    @Produces(MediaType.APPLICATION_JSON)
+    public R<List<ProcessTask>> getProcessHisTask(@QueryParam("processId") String processId) {
+        List<HistoricTaskInstance> hisTasks = activitiService.getHisTasks(processId);
+        if (Func.isEmpty(hisTasks)) return R.ok(Collections.emptyList());
+        return R.ok(hisTasks.stream().map(ProcessTask::assemble).collect(Collectors.toList()));
     }
 
     /**
@@ -70,8 +85,23 @@ public class WorkflowEndpointResource {
     @POST
     @Path(WorkflowUriConstant.SUBMIT_TASK)
     @Produces(MediaType.APPLICATION_JSON)
-    public R<Boolean> getProcessActiveTask(@QueryParam("taskId") String taskId, Map<String, Object> params) {
+    public R<Boolean> submitTask(@QueryParam("taskId") String taskId, Map<String, Object> params) {
         activitiService.handleTask(taskId, params);
         return R.ok(Boolean.TRUE);
     }
+
+    /**
+     * 获取活动任务参数
+     *
+     * @param taskId 活动任务id
+     * @return 流程任务
+     */
+    @GET
+    @Path(WorkflowUriConstant.ACTIVE_TASK_VARIABLE)
+    @Produces(MediaType.APPLICATION_JSON)
+    public R<Map<String, Object>> getActiveTaskVariables(@QueryParam("taskId") String taskId) {
+        Map<String, Object> taskVariables = activitiService.getTaskVariables(taskId);
+        return R.ok(taskVariables);
+    }
+
 }

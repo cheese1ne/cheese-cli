@@ -34,7 +34,7 @@ public class CheeseExecutorAutoConfiguration extends AsyncConfigurerSupport {
     @Bean(name = {"async-Executor"})
     @Override
     public Executor getAsyncExecutor() {
-        log.info("加载到的线程池的配置信息是" + cheeseAsyncProperties);
+        log.info("loading thread properties: {}", cheeseAsyncProperties);
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(cheeseAsyncProperties.getCorePoolSize());
         executor.setMaxPoolSize(cheeseAsyncProperties.getMaxPoolSize());

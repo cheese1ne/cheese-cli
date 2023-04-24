@@ -10,6 +10,8 @@ public interface WorkflowUriConstant {
     String BASE_URI = "/api";
     String WORK_FLOW = "/workflow";
     String CREATE_PROCESS_EXECUTION = "/process/create";
-    String GET_ACTIVE_TASK = "/task/active";
+    String ACTIVE_TASK = "/task/active";
+    String HIS_TASK = "/task/completed";
     String SUBMIT_TASK = "/task/submit";
+    String ACTIVE_TASK_VARIABLE = "/active/task/variables";
 }

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.model.FlowNode;
 import org.activiti.bpmn.model.Process;
 import org.activiti.engine.*;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,11 @@ public class ActivitiServiceImpl implements IActivitiService {
     }
 
     @Override
+    public List<HistoricTaskInstance> getHisTasks(String processId) {
+        return historyService.createHistoricTaskInstanceQuery().processInstanceId(processId).finished().list();
+    }
+
+    @Override
     public Task getActiveTask(String processId) {
         return taskService.createTaskQuery().processInstanceId(processId).singleResult();
     }
@@ -93,5 +99,15 @@ public class ActivitiServiceImpl implements IActivitiService {
     @Override
     public void deleteRunProcess(String processId) {
         runtimeService.deleteProcessInstance(processId, "finish");
+    }
+
+    @Override
+    public Map<String, Object> getProcessVariables(String processId) {
+        return runtimeService.getVariables(processId);
+    }
+
+    @Override
+    public Map<String, Object> getTaskVariables(String taskId) {
+        return taskService.getVariables(taskId);
     }
 }

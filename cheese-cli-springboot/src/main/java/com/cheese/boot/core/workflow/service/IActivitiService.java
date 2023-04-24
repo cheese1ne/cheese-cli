@@ -1,5 +1,6 @@
 package com.cheese.boot.core.workflow.service;
 
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Task;
 
 import java.util.List;
@@ -39,6 +40,14 @@ public interface IActivitiService {
     List<Task> getActiveTasks(String processId);
 
     /**
+     * 根据流程id获取历史任务
+     *
+     * @param processId
+     * @return
+     */
+    List<HistoricTaskInstance> getHisTasks(String processId);
+
+    /**
      * 获取流程下第一个待执行任务
      * tip：此方法返回的是懒加载的对象
      *
@@ -50,7 +59,7 @@ public interface IActivitiService {
     /**
      * 跳转到目标任务
      *
-     * @param taskId 任务id
+     * @param taskId     任务id
      * @param targetTask 目标任务标识
      **/
     void jump(String taskId, String targetTask);
@@ -68,4 +77,21 @@ public interface IActivitiService {
      * @param processId
      **/
     void deleteRunProcess(String processId);
+
+    /**
+     * 根据流程id流程设置参数
+     *
+     * @param processId
+     * @return
+     */
+    Map<String, Object> getProcessVariables(String processId);
+
+    /**
+     * 获取任务绑定的参数
+     *
+     * @param processId
+     * @return
+     */
+    Map<String, Object> getTaskVariables(String processId);
+
 }

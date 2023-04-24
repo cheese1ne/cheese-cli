@@ -10,14 +10,14 @@ logging:
   file: log/${spring.application.name}/${spring.application.name}.info.log
   level:
     com:
-      favorites: DEBUG
+      favorites: INFO
       # 业务模块 DEBUG或者ERROR
       cheese:
         boot:
           modules: DEBUG
     org:
       springframework:
-        web: DEBUG
+        web: INFO
 
 
 
