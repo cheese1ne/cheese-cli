@@ -3,6 +3,7 @@ package com.cheese.boot.core.workflow.service;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.task.Task;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -94,4 +95,19 @@ public interface IActivitiService {
      */
     Map<String, Object> getTaskVariables(String processId);
 
+    /**
+     * 最新部署流程图
+     *
+     * @param process 流程key
+     * @return 流程图流
+     */
+    InputStream getProcessDeployDiagram(String process);
+
+    /**
+     * 流程实例运行流程图
+     *
+     * @param processId 流程实例id
+     * @return
+     */
+    InputStream getProcessInsDiagram(String processId);
 }

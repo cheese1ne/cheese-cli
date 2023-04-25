@@ -14,4 +14,6 @@ public interface WorkflowUriConstant {
     String HIS_TASK = "/task/completed";
     String SUBMIT_TASK = "/task/submit";
     String ACTIVE_TASK_VARIABLE = "/active/task/variables";
+    String DEPLOY_PROCESS_DIAGRAM = "/process/deploy/diagram";
+    String INS_PROCESS_DIAGRAM = "/process/ins/diagram";
 }

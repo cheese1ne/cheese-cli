@@ -3,16 +3,25 @@ package com.cheese.boot.core.workflow.service.impl;
 import com.cheese.boot.core.workflow.cmd.DeleteTaskCmd;
 import com.cheese.boot.core.workflow.cmd.SetFLowNodeAndGoCmd;
 import com.cheese.boot.core.workflow.service.IActivitiService;
+import com.cheese.boot.core.workflow.tool.DiagramUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.FlowNode;
 import org.activiti.bpmn.model.Process;
 import org.activiti.engine.*;
+import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.activiti.image.ProcessDiagramGenerator;
+import org.activiti.image.impl.DefaultProcessDiagramGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -109,5 +118,36 @@ public class ActivitiServiceImpl implements IActivitiService {
     @Override
     public Map<String, Object> getTaskVariables(String taskId) {
         return taskService.getVariables(taskId);
+    }
+
+    @Override
+    public InputStream getProcessDeployDiagram(String process) {
+        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().processDefinitionKey(process).orderByProcessDefinitionVersion().desc().list();
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+        ProcessDefinition processDefinition = list.get(0);
+        BpmnModel model = repositoryService.getBpmnModel(processDefinition.getId());
+        ProcessDiagramGenerator generator = new DefaultProcessDiagramGenerator();
+        return generator.generateDiagram(model, "宋体", "微软雅黑", "黑体");
+    }
+
+    @Override
+    public InputStream getProcessInsDiagram(String processInstanceId) {
+        // 获取历史流程实例
+        HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+        // 获取流程中已经执行的节点，按照执行先后顺序排序
+        List<HistoricActivityInstance> historicActivityInstanceList = historyService.createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceId().asc().list();
+        // 构造已执行的节点ID集合
+        List<String> executedActivityIdList = new ArrayList<>();
+        for (HistoricActivityInstance activityInstance : historicActivityInstanceList) {
+            executedActivityIdList.add(activityInstance.getActivityId());
+        }
+        // 获取bpmnModel
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(historicProcessInstance.getProcessDefinitionId());
+        List<String> nodeIds = DiagramUtil.getExecutedFlows(bpmnModel, historicActivityInstanceList);
+        // 使用默认配置获得流程图表生成器，并生成追踪图片字符流
+        ProcessDiagramGenerator processDiagramGenerator = new DefaultProcessDiagramGenerator();
+        return processDiagramGenerator.generateDiagram(bpmnModel, executedActivityIdList, nodeIds, "宋体", "微软雅黑", "黑体");
     }
 }
