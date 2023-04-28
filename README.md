@@ -28,6 +28,4 @@ cheese-cli-springboot
 ```
 ****
 
-- tip:路漫漫其修远兮，剩余的工作还有很多(截止20230201，提交了安全模块与工作流模块)
-
 ### 二、cheese-cli-springcloud
