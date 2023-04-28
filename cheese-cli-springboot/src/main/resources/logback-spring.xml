@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
-    <contextName>activiti</contextName>
+    <contextName>cheese-boot</contextName>
     <property name="logback.logdir" value="log/cheese-cli-boot"/>
     <property name="logback.appname" value="cheese-cli-boot"/>
     <!-- 彩色日志依赖的渲染类 -->
@@ -43,10 +43,10 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
             <FileNamePattern>${logback.logdir}/${logback.appname}.%d{yyyy-MM-dd}.info.log</FileNamePattern>
-            <!--只保留最近90天的日志-->
+            <!--只保留最近15天的日志-->
             <maxHistory>15</maxHistory>
             <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
-            <!--            <totalSizeCap>1GB</totalSizeCap>-->
+            <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
         <!--日志输出编码格式化-->
         <encoder>
@@ -70,10 +70,10 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
             <FileNamePattern>${logback.logdir}/${logback.appname}.%d{yyyy-MM-dd}.error.log</FileNamePattern>
-            <!--只保留最近90天的日志-->
+            <!--只保留最近15天的日志-->
             <maxHistory>15</maxHistory>
             <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
-            <!--<totalSizeCap>1GB</totalSizeCap>-->
+            <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
         <!--日志输出编码格式化-->
         <encoder>
