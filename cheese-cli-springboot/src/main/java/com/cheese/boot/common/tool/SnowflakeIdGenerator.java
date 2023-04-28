@@ -124,6 +124,8 @@ public class SnowflakeIdGenerator {
     }
 
     /**
+     *
+     * FIXME NetworkInterface.getByInetAddress(ip) return null
      * <p>
      * 数据标识id部分
      * </p>
