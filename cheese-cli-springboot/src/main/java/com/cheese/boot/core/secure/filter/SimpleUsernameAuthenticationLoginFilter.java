@@ -14,6 +14,8 @@ import java.io.IOException;
 
 /**
  * 登录认证的filter 参照UsernamePasswordAuthenticationFilter
+ * 此过滤器为了理解UsernamePasswordAuthenticationFilter的设计思路，如果要使用
+ * 需要往当前过滤器中设置AuthenticationManager
  *
  * 未使用
  *

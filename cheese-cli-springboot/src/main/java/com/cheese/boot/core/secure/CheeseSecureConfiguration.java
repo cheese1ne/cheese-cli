@@ -131,7 +131,7 @@ public class CheeseSecureConfiguration extends WebSecurityConfigurerAdapter impl
 //                .maximumSessions(1).maxSessionsPreventsLogin(false).expiredSessionStrategy(new ExpiredSessionStrategy())
 //                .sessionRegistry(new SessionRegistryImpl());
 
-        //配置登录地址
+        //配置登录地址 security自定义登录地址只需要配置loginProcessingUrl即可(不需要定义实际的接口)
         http.formLogin().loginProcessingUrl("/api/login").successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler);
         //配置登出地址
         http.logout().logoutUrl("/api/logout").logoutSuccessHandler(logoutSuccessHandler);
