@@ -1,5 +1,6 @@
 package com.cheese.boot.modules.auth;
 
+import com.cheese.boot.common.anno.Auth;
 import com.cheese.boot.common.tool.ApplicationContextHelper;
 import com.cheese.boot.core.secure.props.CheeseUserDetailsProperties;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 public class SecureCheckEndPoint {
 
+    @Auth(identifier = "user::create")
     @RequestMapping("/show")
     public String showHome() {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
