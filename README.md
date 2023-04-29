@@ -5,13 +5,15 @@
 ```markdown
 cheese-cli-springboot
 ├── common -- 定义全局使用的缓存、属性配置、常量维护、系统工具等
+├    ├── anno -- 全局注解
 ├    ├── constant -- 全局常量包
 ├    ├── tool -- 全局工具包
 ├── core -- 模块集成核心包
+├    ├── aop -- spring-aop的集成示例，参考apache-shiro
 ├    ├── executor -- 线程模块
 ├    ├── log -- 日志模块
 ├    ├── secure -- 安全模块，集成springSecurity
-├    ├── workflow -- 工作流模块，集成Activity7，提供常用的流程处理操作
+├    ├── workflow -- 工作流模块，集成Activity7，提供常用的流程处理操作，集成jersey作为endpoint
 ├    ├── metadata -- 元数据模块，集成elasticsearch，对系统中的原始数据进行资源管理
 ├    ├── oss -- 对象存储模块，集成Qiniu云
 ├         ├── qiniu -- 集成qiniu云
