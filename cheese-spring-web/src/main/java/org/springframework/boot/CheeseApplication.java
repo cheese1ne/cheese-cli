@@ -1,5 +1,6 @@
 package org.springframework.boot;
 
+import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.WebServer;
 import org.springframework.web.context.WebApplicationContext;
@@ -14,6 +15,7 @@ public class CheeseApplication {
 
     public static ConfigurableApplicationContext run(Class<?> mainClass, String... args) {
         // 创建一个web的上下文
+        AnnotationConfigServletWebServerApplicationContext webServerApplicationContext = new AnnotationConfigServletWebServerApplicationContext();
         AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
         webApplicationContext.register(mainClass);
         // 刷新容器
